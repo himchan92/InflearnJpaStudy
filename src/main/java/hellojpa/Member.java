@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -16,6 +17,7 @@ import java.util.Date;
 public class Member {
 
     @Id
+    //@GeneratedValue : IDENTITY(MySQL auto increment, DB에 PK 생성 위임0), SEQUENCE(Oracle 시퀀스)
     private Long id;
 
     @Column(name = "name") // DB 컬럼명 설정
