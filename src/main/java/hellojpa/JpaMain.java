@@ -17,20 +17,29 @@ public class JpaMain {
 
         try {
             Member member = new Member();
-            member.setId(101L); //PK 부여
-            member.setName("HelloJPA");
+            // 최초 셋팅 : 1차 캐시 등록
+            member.setId(101L);
+            member.setName("HelloMyBatis");
 
-            //영속상태 : commit 전까진 DB저장 안하고 모아놓고 commit 순간 한번에 수행하여 메모리 절약
+            //영속상태 : commit 전까진 DB 저장 안하고 모아놓고 commit 순간 한번에 수행하여 메모리 절약
+            // JPA INSERT 수행(commit 안해서 실제 DB 반영은 X)
             em.persist(member);
 
+            // JPA 변경감지로 UPDATE 수행 지원(Dirty Checking)
+            // 최초 persist 시 1차 캐시에 저장 후 setter 시 1차 캐시값과 비교 하여 차이있을 시 Dirty Checking 수행
+            member.setName("HelloJPA");
+
+            Member member2 = em.find(Member.class, 101L);
+            em.remove(member2); // JPA DELETE SQL 수행
+
             // 1차 캐시 조회
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
-            System.out.println("findMember.id = " + findMember1.getId());
-            System.out.println("findMember.name = " + findMember2.getName());
+//            Member findMember1 = em.find(Member.class, 101L);
+//            Member findMember2 = em.find(Member.class, 101L);
+//            System.out.println("findMember.id = " + findMember1.getId());
+//            System.out.println("findMember.name = " + findMember2.getName());
 
             //true : 1차캐시로 한 트랜젝션내에서는 동일 참조관계
-            System.out.println(findMember1 == findMember2);
+//            System.out.println(findMember1 == findMember2);
 
 //            Member findMember = em.find(Member.class, 1L); //PK 기준 값 조회
 //            findMember.setName("Hello JPA"); // 변경작업 : JPA감지하여 UPDATE 수행지원
