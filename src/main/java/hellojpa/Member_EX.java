@@ -4,17 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-public class Member {
+public class Member_EX {
 
     @Id
     //@GeneratedValue : IDENTITY(MySQL auto increment, DB에 PK 생성 위임0), SEQUENCE(Oracle 시퀀스)
@@ -41,7 +39,7 @@ public class Member {
     @Lob //장문 문자열 타입
     private String description;
 
-    public Member() {}
+    public Member_EX() {}
 
     public Long getId() {
         return id;
