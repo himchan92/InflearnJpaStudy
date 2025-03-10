@@ -21,7 +21,7 @@ public class Member {
     private Long id;
 
     @Column(name = "name") // DB 컬럼명 설정
-    private String username;
+    private String name;
 
     private Integer age;
 
@@ -42,4 +42,68 @@ public class Member {
     private String description;
 
     public Member() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public LocalDateTime getTestLocalTime() {
+        return testLocalTime;
+    }
+
+    public void setTestLocalTime(LocalDateTime testLocalTime) {
+        this.testLocalTime = testLocalTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
