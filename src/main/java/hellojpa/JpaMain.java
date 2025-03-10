@@ -21,6 +21,9 @@ public class JpaMain {
             member.setId(101L);
             member.setName("HelloMyBatis");
 
+            //em.clear(); //영속성 컨택스트 클리어 = 1차캐시 삭제
+            //em.close(); //영속성 관리 종료 = 변경해도 결과 그대로
+
             //영속상태 : commit 전까진 DB 저장 안하고 모아놓고 commit 순간 한번에 수행하여 메모리 절약
             // JPA INSERT 수행(commit 안해서 실제 DB 반영은 X)
             em.persist(member);
