@@ -55,9 +55,11 @@ public class JpaMain {
 //                System.out.println("member.name = " + member.getName());
 //            }
 
+            //em.flush(); // COMMIT 직전 변경내용을 DB에 동기화 수행
 
-            //DB 반영 처리
-            tx.commit();
+            // DB 반영
+            // 플러시 자동 수행(영속성 컨택스트 변경내용을 DB에 반영)
+            //tx.commit();
         } catch (Exception e) {
             tx.rollback(); //예외발생시 Rollback
         } finally {
