@@ -21,7 +21,7 @@ public class JpaMain {
         try {
 
             Team team = new Team();
-            team.setName("TeamA");
+            team.setName("TeamA"); //실무에서는 setter 대신 Builder 패턴 많이 사용
             em.persist(team);
 
             Member member = new Member();

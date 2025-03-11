@@ -17,6 +17,11 @@ public class Member {
     @JoinColumn(name = "TEAM_ID") //조인 컬럼(FK)
     private Team team;
 
+    //1:1 Locker 매핑
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
     public Long getId() {
         return id;
     }
