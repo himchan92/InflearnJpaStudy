@@ -33,12 +33,20 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            /*
+                연관관계 매핑 어노테이션 기본설정은 즉시로딩
+                - 실무에서는 즉시로딩 금지(SQL 예상못한 수행으로 장애우려 및 성능저하)
+                - 실무에서는 @ManyToOne, @OneToOne -> 지연로딩 설정 권장
+             */
+            Member m = em.find(Member.class, member.getId());
+            System.out.println("m = " + m.getTeam().getClass());
 
-            for(Member m : members) {
-                System.out.println("m = " + m.getUsername());
-            }
+//            Member findMember = em.find(Member.class, member.getId());
+//            List<Member> members = findMember.getTeam().getMembers();
+//
+//            for(Member m : members) {
+//                System.out.println("m = " + m.getUsername());
+//            }
 
             // TeamB로 변경
 //            Team newTeam = em.find(Team.class, 100L);
