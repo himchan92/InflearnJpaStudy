@@ -13,9 +13,6 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
     @ManyToOne //다대일
     @JoinColumn(name = "TEAM_ID") //조인 컬럼(FK)
     private Team team;
