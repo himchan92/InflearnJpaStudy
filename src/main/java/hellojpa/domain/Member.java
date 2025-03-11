@@ -1,9 +1,6 @@
 package hellojpa.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Member {
@@ -12,10 +9,16 @@ public class Member {
     @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
-    private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Column(name = "USERNAME")
+    private String username;
+
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne //다대일
+    @JoinColumn(name = "TEAM_ID") //조인 컬럼
+    private Team team;
 
     public Long getId() {
         return id;
@@ -25,35 +28,19 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getCity() {
-        return city;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
