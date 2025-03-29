@@ -13,13 +13,17 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        Member member = new Member();
-        member.setId(1L);
-        member.setName("HelloA");
-        em.persist(member); //저장
-        tx.commit(); //실제 DB 반영처리
-
-        em.close();
+        try {
+            Member member = new Member();
+            member.setId(1L);
+            member.setName("HelloA");
+            em.persist(member); //저장
+            tx.commit(); //실제 DB 반영처리
+        } catch (Exception e) {
+            tx.rollback(); //오류나면 롤백처리
+        } finally {
+            em.close();
+        }
         emf.close();
     }
 }
