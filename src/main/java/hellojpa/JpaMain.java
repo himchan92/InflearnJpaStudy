@@ -21,10 +21,10 @@ public class JpaMain {
             member.setId(1L);
             member.setName("HelloA");
 
-            //---------- 영속 상태(실제 DB 수행 x), 1차캐시 저장 ----------//
+            //---------- 영속 상태(실제 DB 수행 x), 1차캐시 저장, 커밋전까지 DB 반영 후보 등록 ----------//
             //em.persist(member);
 
-            //em.detach(member): // 준영속상태로 변경
+            //em.detach(member): // 준영속상태로 변경, JPA 대상 제외, 커밋해도 반영안됨
             //em.remove(member); // 수행대상 삭제
 
             //JPA 조회
@@ -50,6 +50,7 @@ public class JpaMain {
             find.setName("HelloBoot");
 
             //------ 실제 DB 수행 ------//
+            // 플러시 수행 : 커밋하면 자동 수행되고 그전까진 수행안함
             // 변경감지 체크단계로 위 setter 작업 등 변경 있으면 UPDATE 수행
             tx.commit();
         } catch (Exception e) {
