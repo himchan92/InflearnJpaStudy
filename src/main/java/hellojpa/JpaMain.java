@@ -16,10 +16,16 @@ public class JpaMain {
 
         try {
             //JPA 저장
+            //---------- 비영속 상태 ----------//
             Member member = new Member();
             member.setId(1L);
             member.setName("HelloA");
+
+            //---------- 영속 상태(실제 DB 저장 x) ----------//
             em.persist(member);
+
+            //em.detach(member): // 준영속상태로 변경
+            //em.remove(member); // 수행대상 삭제
 
             //JPA 조회
             Member findMember = em.find(Member.class, 1L); //1L 조회
@@ -39,7 +45,9 @@ public class JpaMain {
             //JPA 수정
             findMember.setName("HelloJPA");
 
-            tx.commit(); //실제 DB 반영처리, 위 setter 시 변경감지 체크후 있으면 UPDATE 수행
+            //------ 실제 DB 반영 처리 ------//
+            // 변경감지 체크단계로 위 setter 작업 등 변경 있으면 UPDATE 수행
+            tx.commit();
         } catch (Exception e) {
             tx.rollback(); //오류나면 롤백처리
         } finally {
