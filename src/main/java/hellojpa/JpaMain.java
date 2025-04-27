@@ -18,26 +18,26 @@ public class JpaMain {
             // 비영속 상태(JPA 적용 전)
             Member member = new Member();
             // update문 없이 setter 후 commit 하면 JPA 내부적으로 변경감지하여 update 수행
-            member.setId(100L);
-            member.setName("HelloJPA");
+//            member.setId(100L);
+//            member.setName("HelloJPA");
 
             // 영속상태(JPA 적용, 1차캐시 저장, DB 저장 X)
-            em.persist(member);
-
-            em.flush(); // DB에 즉시 반영처리
-
-            Member findMember = em.find(Member.class, 100L); //1차캐시 조회 -> 동일 소스면 중복 호출안하는 이점
-            System.out.println("findMember id = " + member.getId());
-            System.out.println("findMember name = " + member.getName());
-
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                .setFirstResult(5) //페이징 5부터
-                .setMaxResults(8) //페이징 8까지
-                .getResultList(); //ENTITY 대상 수행
-
-            for(Member item : result) {
-                System.out.println("member.name = " + item.getName());
-            }
+//            em.persist(member);
+//
+//            em.flush(); // DB에 즉시 반영처리
+//
+//            Member findMember = em.find(Member.class, 100L); //1차캐시 조회 -> 동일 소스면 중복 호출안하는 이점
+//            System.out.println("findMember id = " + member.getId());
+//            System.out.println("findMember name = " + member.getName());
+//
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                .setFirstResult(5) //페이징 5부터
+//                .setMaxResults(8) //페이징 8까지
+//                .getResultList(); //ENTITY 대상 수행
+//
+//            for(Member item : result) {
+//                System.out.println("member.name = " + item.getName());
+//            }
 
             tx.commit(); // 영속상태 -> DB 반영 처리
 
