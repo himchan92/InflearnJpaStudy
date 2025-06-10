@@ -15,6 +15,7 @@ public class JpaMain {
         tx.begin();
 
         //JPA 변경은 한트랜젝션안에서 수행
+        //영속성 컨택스트 : 객체와 관계형 DB 매핑, 눈에안보인 내부동작
         try {
             //비영속상태
             Member member = new Member();
@@ -29,7 +30,11 @@ public class JpaMain {
             Member findMember = em.find(Member.class, 1L);
 
             //변경감지 UPDATE 수행지원
+            //변경감지시 내부적으로 플러시(변경정보등록) 발생
             findMember.setName("HelloMyBatis");
+
+            //플러시: 기본 자동수행되어있음, 변경내용 DB 동기화, 직접할거면 커밋직전에 수행하면됨
+            //em.flush();
 
             Member findMember2 = em.find(Member.class, 1L);
             System.out.println("findMember == findMember2 " + (findMember == findMember2));
