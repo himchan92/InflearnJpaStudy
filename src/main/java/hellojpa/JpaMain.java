@@ -27,6 +27,10 @@ public class JpaMain {
             //영속 시 1차캐시에 담겨있는것 우선조회하고 없으면 DB조회
             //한트랜젝션내에서는 동일성보장
             Member findMember = em.find(Member.class, 1L);
+
+            //변경감지 UPDATE 수행지원
+            findMember.setName("HelloMyBatis");
+
             Member findMember2 = em.find(Member.class, 1L);
             System.out.println("findMember == findMember2 " + (findMember == findMember2));
             System.out.println("findMember.id = " + findMember.getId());
@@ -41,6 +45,12 @@ public class JpaMain {
             for(Member item : result) {
                 System.out.println("item.name = " + item.getName());
             }
+
+            //삭제대상 조회
+            Member target = em.find(Member.class, 1L);
+
+            //삭제 수행
+            em.remove(target);
 
             //DB INSERT 수행
             tx.commit();
