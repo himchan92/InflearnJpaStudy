@@ -24,7 +24,8 @@ public class JpaMain {
             //영속상태
             em.persist(member);
 
-            Member findMember = em.find(Member.class, 1L); //id 컬럼기준 조회
+            //영속 시 1차캐시에 담겨있는것 우선조회하고 없으면 DB조회
+            Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember.id = " + findMember.getId());
             System.out.println("findMember.name = " + findMember.getName());
 
