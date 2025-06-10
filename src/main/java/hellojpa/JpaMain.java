@@ -16,10 +16,13 @@ public class JpaMain {
 
         //JPA 변경은 한트랜젝션안에서 수행
         try {
+            //비영속상태
             Member member = new Member();
             member.setId(1L);
             member.setName("HelloA");
-            em.persist(member); //영속성 등록 = DB반영 x
+
+            //영속상태
+            em.persist(member);
 
             Member findMember = em.find(Member.class, 1L); //id 컬럼기준 조회
             System.out.println("findMember.id = " + findMember.getId());
