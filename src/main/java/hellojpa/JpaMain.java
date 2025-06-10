@@ -21,11 +21,14 @@ public class JpaMain {
             member.setId(1L);
             member.setName("HelloA");
 
-            //영속상태
+            //영속상태: DB에 INSERT 수행 전
             em.persist(member);
 
             //영속 시 1차캐시에 담겨있는것 우선조회하고 없으면 DB조회
+            //한트랜젝션내에서는 동일성보장
             Member findMember = em.find(Member.class, 1L);
+            Member findMember2 = em.find(Member.class, 1L);
+            System.out.println("findMember == findMember2 " + (findMember == findMember2));
             System.out.println("findMember.id = " + findMember.getId());
             System.out.println("findMember.name = " + findMember.getName());
 
@@ -39,7 +42,8 @@ public class JpaMain {
                 System.out.println("item.name = " + item.getName());
             }
 
-            tx.commit(); //DB 반영
+            //DB INSERT 수행
+            tx.commit();
         } catch (Exception e) {
             tx.rollback();
         } finally {
