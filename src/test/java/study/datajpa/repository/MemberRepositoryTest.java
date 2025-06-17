@@ -40,4 +40,17 @@ class MemberRepositoryTest {
         List<Member> result = memberRepository.findUser("AAA", 10);
         assertThat(result.get(0)).isEqualTo(member1);
     }
+
+    @Test
+    public void findUsernameList() {
+        Member member1 = new Member("AAA", 10);
+        Member member2 = new Member("BBB", 20);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        List<String> usernameList = memberRepository.findUsernameList();
+        for(String s: usernameList) {
+            System.out.println("s = " + s);
+        }
+    }
 }
